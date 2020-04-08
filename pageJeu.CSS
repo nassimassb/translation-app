@@ -1,0 +1,37 @@
+header{
+    background-color: rgb(76, 76, 250);
+    color: white;
+    padding-top:1px;
+    font-family: Comic Sans MS;
+    font-style: italic;
+    padding-bottom: 30px;
+}
+
+footer{
+
+    position:absolute;
+    left: 20px;
+    bottom:0;
+}
+b{
+    font-size: 2em;
+}
+.buttons
+{
+    margin-right: 20px;
+}
+#answerZone
+{
+    border: 1px solid black;
+    padding: 50px 20px;
+    width: 50%;
+    margin: 10px 0px;
+}
+#clickableButtons
+{
+    margin: 20px 0;
+}
+#mainBtn
+{
+    margin-left: 20px;
+}

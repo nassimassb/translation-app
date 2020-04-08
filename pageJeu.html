@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quizz</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Page d’accueil de mon site">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript" src="pageQuizz.js"></script>
+        <link rel="stylesheet" type="text/css" href="pageJeu.css"/>       
+    </head>
+
+        <body onload="setPageContent()">
+
+            <header>
+                <center>
+                    <h1>Plan langue</h1>
+                    <h6>WEBG2 - Projet 1</h6>
+                </center>
+            </header>
+            <br>
+            <center>
+            <h2 id="quizzTheme">Quiz sur le thème:</h2>
+            </center>
+
+            <div style="margin-left: 20px;">
+                <div>
+                    Question: <span id="questionTitle"></span>
+                </div>
+                <br />
+                <!-- La question sera posée ici -->
+                <h4 id="question"></h4>
+    
+                <!-- La zone où sont disposées les réponses -->
+                <div id="answerZone">
+    
+                </div>
+                <!-- Les boutons cliquables -->
+                <div id="clickableButtons">
+                    
+                </div>
+                
+                <p>
+                    Cliquer sur un mot pour le placer dans la réponse à la suite. Cliquez sur un mot
+                    de la reponse pour l'enlever.
+                </p>
+                <br>
+    
+                <!-- ici c'est le bouton "valider" du form -->
+                <div id="validation">
+                    <button type="button" onclick="verif()" class="btn btn-primary" id="submitBtn">Valider</button>
+                </div>
+            </div>
+        </body>
+
+        
+</html>
