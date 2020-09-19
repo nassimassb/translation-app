@@ -1,61 +1,50 @@
 let questionNb;
 let wrongAnswers;
-let numQuiz = new URL(location.href).searchParams.get("liste"); //num de l'élément selectionné
+let numQuiz = new URL(location.href).searchParams.get("liste"); //nb of selected item
 
 function setPageContent(){
-    const selectedData = data[numQuiz]; //le theme à la position numQuizz
-    const questions = selectedData.questions; //récupère toutes les questions de la catégorie
-    let sentence; //string avec la réponse et l'extra
-    let res; // divise chaque mot en tableau
-    let answer;
-    const quizzTheme = document.getElementById("quizzTheme"); 
+    const selectedData = data[numQuiz]; //topic
+    const questions = selectedData.questions; //all the questions of the category
+    let splitWords; // divise chaque mot en tableau
+    const quizzTheme = document.getElementById("quizzTheme"); //html title
     questionNb = 0;
     wrongAnswers = 0; 
     //debug
-    // console.log(selectedData);
-    // console.log(res);
+    //console.log(selectedData);
  
-    // on va rajouter la description à côté du titre
+    // adds the description next to the title
     quizzTheme.innerHTML += " " + selectedData.description;
-    disposeButtons(questions,res);
+    disposeButtons(questions,splitWords);
 }
  
-/**
- * Dispose les boutons et créer la question
- */
-function disposeButtons(questions,res){ 
+//dispose buttons and create the question
+function disposeButtons(questions,splitWords){ 
     const buttonsDiv = document.getElementById('clickableButtons');
     let buttons; 
     const questionTitle = document.getElementById("questionTitle");
     const question = document.getElementById('question');
     answer = "";
  
-    //Indique la question au joueur
+    //displays the question
     question.innerHTML = " " + questions[questionNb].question;
  
     questionTitle.innerHTML = " " + (questionNb+1) + " sur " + questions.length;
  
     sentence = questions[questionNb].answer + " " + questions[questionNb].extras;
-    res = sentence.split(" ");
+    splitWords = sentence.split(" ");
  
-    /**
-     * Mélange les données du tableau de valeurs
-     */
-    shuffle(res);
-    //rajoute les boutons en dessous de la zone de texte
-    for(let i = 0; i < res.length; i++){
+    shuffle(splitWords);
+    //create and add the buttons on the bottom of the screen to start the game
+    for(let i = 0; i < splitWords.length; i++){
         buttons = document.createElement("button");
-        buttons.value = res[i];
+        buttons.value = splitWords[i];
         buttons.type = "button";
         buttons.className = "btn btn-secondary buttons";
-        buttons.innerHTML = res[i];
+        buttons.innerHTML = splitWords[i];
         buttonsDiv.append(buttons);
     }
 }
-/**
- * Algoritme de mélange des mots.
- * @param {*} array tableau contenant les mots
- */
+
 function shuffle(array) 
 {
     let counter = array.length; 
@@ -67,10 +56,10 @@ function shuffle(array)
     }
 }
  
-
+//check if where we are in the answer zone and move the buttons to the right place
 $(document).ready(function(){
     $(document).on('click', ".buttons", function(){
-         
+
         if(this.parentElement.id == "clickableButtons")
         {
             answer += this.value + " "; //rajoute la valeur du bouton à notre String
@@ -91,10 +80,11 @@ $(document).ready(function(){
   function verif(){
     let questionAnswer = ""; 
     const questions = data[numQuiz].questions;
+    //disable submit and other buttons to show correctAnswer div
     document.getElementById("submitBtn").style.display = "none";
     $(".buttons").prop('disabled', 'disabled');
-    correctAnswer = document.createElement("div");
-    nextQuestion = document.createElement("button");
+    correctAnswer = document.createElement("div"); //displays String to show if answer is correct or not
+    nextQuestion = document.createElement("button"); //go to the next question
     nextQuestion.type = "button";
     nextQuestion.id = "next";
     nextQuestion.innerHTML = "Suivant";
@@ -114,29 +104,26 @@ $(document).ready(function(){
     $("#validation").append(nextQuestion);
   }
  
-  /**
-   * Indiquer au joueur que la réponse est correcte
-   */
   function correct(){
     correctAnswer.className = "alert alert-success correct";
     correctAnswer.innerHTML = "Correct! Veuillez passer à la question suivante";
  
     nextQuestion.className = "btn btn-success next";
 }
-  /**
-   * Indiquer au joueur que la réponse est fausse
-   */
+
   function wrong(){
     correctAnswer.className = "alert alert-danger correct";
     correctAnswer.innerHTML = "faux!";
  
     nextQuestion.className = "btn btn-danger next";
 }
+
+//go to the next question when clicking on the next button
 $(document).ready(function(){
     $(document).on('click', "#next", function(){
         const questions = data[numQuiz].questions;
         let res = sentence.split(" ");
-        //supprime les anciens boutons, la div "correct" et le bouton "next"
+        //delete the buttons and adds some new buttons, delete the correctAnswer div and the next button
         $(".buttons").fadeOut();
         $(".correct").fadeOut();
         $(".next").fadeOut();
@@ -147,6 +134,7 @@ $(document).ready(function(){
             document.getElementById("submitBtn").style.display = "inline";
 
         }else{
+            //game finished
             results = document.createElement("b");
             results.innerHTML = "Votre score est de " + ((questions.length)-wrongAnswers) + "/" + (questions.length);
             results.className = "alert alert-warning";
@@ -158,7 +146,8 @@ $(document).ready(function(){
         }
     });
   });
-    //retourne au menu principal
+
+  //go to main menu
  $(document).ready(function(){
     $(document).on('click', ".mainBtn", function(){
         window.location.href = "index.html";

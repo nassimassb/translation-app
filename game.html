@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Quizz</title>
+        <title>Quiz</title>
         <meta charset="UTF-8">
-        <meta name="description" content="Page d’accueil de mon site">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script type="text/javascript" src="data.js"></script>
-        <script type="text/javascript" src="pageQuizz.js"></script>
-        <link rel="stylesheet" type="text/css" href="pageJeu.css"/>       
+        <script type="text/javascript" src="quiz.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css"/>       
     </head>
 
         <body onload="setPageContent()">
@@ -29,14 +29,13 @@
                     Question: <span id="questionTitle"></span>
                 </div>
                 <br />
-                <!-- La question sera posée ici -->
+                
                 <h4 id="question"></h4>
     
-                <!-- La zone où sont disposées les réponses -->
                 <div id="answerZone">
     
                 </div>
-                <!-- Les boutons cliquables -->
+                
                 <div id="clickableButtons">
                     
                 </div>
@@ -47,7 +46,6 @@
                 </p>
                 <br>
     
-                <!-- ici c'est le bouton "valider" du form -->
                 <div id="validation">
                     <button type="button" onclick="verif()" class="btn btn-primary" id="submitBtn">Valider</button>
                 </div>
